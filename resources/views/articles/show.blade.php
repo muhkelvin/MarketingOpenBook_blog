@@ -3,6 +3,33 @@
 @section('title', $article->meta_title ?? $article->title)
 @section('meta_description', $article->meta_description ?? Str::limit(strip_tags($article->body), 150))
 
+{{-- Pastikan layout Anda menyediakan yield('head') di bagian <head> --}}
+@section('head')
+    <script type="application/ld+json">
+        {!! json_encode([
+            "@context"      => "https://schema.org",
+            "@type"         => "Article",
+            "headline"      => $article->title,
+            "description"   => $article->meta_description ?? Str::limit(strip_tags($article->body), 150),
+            "image"         => $article->image,
+            "datePublished" => $article->published_at->toIso8601String(),
+            "author"        => [
+                "@type" => "Person",
+                "name"  => 'Marketing Open Books'
+            ],
+            "publisher"     => [
+                "@type" => "Organization",
+                "name"  => "Marketing Open Books",
+                "logo"  => [
+                    "@type" => "ImageObject",
+                    "url"   => asset('icon.jpg')
+                ]
+            ],
+            "keywords"      => $article->tags->pluck('name')
+        ], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}
+    </script>
+@endsection
+
 @section('content')
     <div class="container mx-auto px-4 py-12">
         <article class="max-w-4xl mx-auto">

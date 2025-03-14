@@ -22,7 +22,7 @@
         }
     </style>
 
-    @yield('schema')
+    @yield('head')
 
 </head>
 
