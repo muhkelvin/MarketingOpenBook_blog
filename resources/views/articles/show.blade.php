@@ -13,6 +13,7 @@
             "description"   => $article->meta_description ?? Str::limit(strip_tags($article->body), 150),
             "image"         => $article->image,
             "datePublished" => $article->published_at->toIso8601String(),
+            "dateModified" => $article->updated_at->toIso8601String(),
             "author"        => [
                 "@type" => "Person",
                 "name"  => 'Marketing Open Books'
