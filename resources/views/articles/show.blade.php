@@ -54,14 +54,6 @@
                         <div class="flex items-center">
                             <time>{{ $article->published_at->isoFormat('MMMM Do, YYYY') }}</time>
                             <span class="w-1 h-1 bg-accent rounded-full mx-3"></span>
-                            <span>{{ $article->reading_time ?? '5' }} min read</span>
-                        </div>
-                        <span class="hidden md:inline-block text-sm">•</span>
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            {{ $article->views ?? '0' }} views
                         </div>
                     </div>
                 @endif
