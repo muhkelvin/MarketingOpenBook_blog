@@ -9,23 +9,40 @@
     <link rel="canonical" href="{{ url()->current() }}">
     <link rel="icon" href="{{ asset('icon.jpg') }}" type="image/x-icon">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        .font-playfair {
-            font-family: 'Playfair Display', serif;
-            letter-spacing: -0.025em;
+    <!-- Muat Tailwind CSS melalui Play CDN dengan plugin -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#F5F5F5',
+                        secondary: '#2D3047',
+                        accent: '#E6B89C',
+                        sage: '#A8C686',
+                        darkgray: '#3A3A3A'
+                    },
+                    fontFamily: {
+                        playfair: ['"Playfair Display"', 'serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        lora: ['Lora', 'serif']
+                    }
+                }
+            }
         }
-        .font-montserrat {
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.01em;
+    </script>
+
+    <!-- Custom CSS tambahan dengan dukungan fitur Tailwind -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
         }
     </style>
 
     @yield('head')
-
 </head>
-
 <body class="bg-primary text-darkgray font-lora antialiased">
 <!-- Header -->
 <header class="bg-secondary fixed w-full top-0 z-50 shadow-sm"
@@ -109,6 +126,7 @@
     <div class="h-[3px] bg-gradient-to-r from-accent to-sage transition-opacity duration-300"
          :class="showBorder ? 'opacity-100' : 'opacity-0'"></div>
 </header>
+
 <!-- Main Content -->
 <main class="container mx-auto pt-28 pb-12 px-4 lg:px-8">
     @yield('content')
@@ -129,7 +147,7 @@
                 </p>
             </div>
 
-            <!-- Navigation Links - Manual Links -->
+            <!-- Navigation Links -->
             <div class="lg:pl-8">
                 <h4 class="font-playfair text-xl font-semibold mb-6 text-accent">Explore</h4>
                 <nav class="space-y-4">
@@ -201,8 +219,6 @@
     </div>
 </footer>
 
-
-
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
 <script>
@@ -215,6 +231,5 @@
 <!-- Alpine.js Script -->
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-
 </body>
 </html>
